@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Dokumentacija za Predavanje</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            background-color: #f1f5f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #0d47a1;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 40px;
+            border-bottom: 2px solid #0d47a1;
+            padding-bottom: 8px;
+        }
+        pre {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 6px;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+        code {
+            background-color: #e8efff;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 1.05em;
+        }
+        img {
+            width: 100%;
+            max-width: 700px;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        ul, ol {
+            margin-left: 40px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .note {
+            background-color: #e3f2fd;
+            border-left: 6px solid #0d47a1;
+            padding: 15px;
+            margin-top: 10px;
+            font-style: italic;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Git Dokumentacija za Sesiju</h1>
+        
+        <div class="section">
+            <h2>1. Uvod u Git (Osnovne Komande)</h2>
+            <h3>Šta je Git?</h3>
+            <p>Git je distribuirani sistem za upravljanje verzijama koda koji omogućava praćenje svih promena u projektu, kreiranje backup-a i olakšava saradnju unutar tima. Njegova osnovna svrha je da osigura bezbedno čuvanje koda i omogući timovima da rade paralelno bez rizika od gubitka podataka ili preklapanja verzija. Svaka promena koja se napravi u projektu može biti zabeležena i praćena kroz istoriju commit-ova.</p>
+            
+            <h3>Instalacija Git-a:</h3>
+            <p>Pre nego što počnete sa radom u Git-u, potrebno je instalirati Git na vaš računar. Posetite <a href="https://git-scm.com/downloads">sledeći link</a> kako biste preuzeli instalacioni paket.</p>
+            <p>U terminalu:</p>
+            <pre><code>git --version</code></pre>
+            <p>Ova komanda prikazuje trenutno instaliranu verziju Git-a i potvrđuje da je instalacija uspešno obavljena.</p>
+            
+            <h3>Osnovne Komande:</h3>
+            <h4>Inicijalizacija repozitorijuma</h4>
+            <p>Na repozitorijum se može gledati kao na projekat</p>
+            <p>Ova komanda kreira novi lokalni repozitorijum u trenutnom direktorijumu. Koristite je kada želite da započnete novi projekat sa Git-om:</p>
+            <pre><code>git init</code></pre>
+            
+            <h4>Kloniranje repozitorijuma</h4>
+            <p>Koristi se za preuzimanje kopije postojećeg repozitorijuma sa udaljenog servera na vaš računar (npr. sa github-a):</p>
+            <pre><code>git clone [URL_REPOZITORIJUMA]</code></pre>
+            <img src="github_devsify_url.PNG" alt="">
+            
+            <h4>Dodavanje fajlova u staging</h4>
+            <p>Dodaje fajlove u staging area, pripremajući ih za sledeći commit. Koristite ovu komandu kada želite da specificirate koje izmene će biti sačuvane:</p>
+            <pre><code>git add .</code></pre>
+            
+            <h4>Kreiranje commit-a</h4>
+            <p>Kreira snapshot trenutnog stanja projektnog direktorijuma. Commit treba da ima jasan opis koji objašnjava šta je izmenjeno:</p>
+            <pre><code>git commit -m "Opis commit-a"</code></pre>
+            <img src="commit.PNG" alt="">
+            <p>Svaki commit ima jedinstveni ID pa je moguće vratiti se "u prošlost" na prethodnu verziju koda</p>
+            <img src="commit_back.PNG" alt="">
+            
+            <h4>Slanje promena na udaljeni repozitorijum</h4>
+            <p>Ova komanda šalje lokalne promene na udaljeni repozitorijum gde se on čuva i omogućavajući drugim članovima tima da ih vide:</p>
+            <pre><code>git push origin main</code></pre>
+            
+            <h4>Preuzimanje promena sa remote-a</h4>
+            <p>Koristi se za preuzimanje izmena sa udaljenog repozitorijuma i ažuriranje lokalne verzije projekta:</p>
+            <pre><code>git pull origin main</code></pre>
+            
+            <h4>Pregled stanja</h4>
+            <p>Prikazuje informacije o trenutnom statusu lokalnog repozitorijuma, uključujući fajlove koji su izmenjeni, ali nisu dodati u staging area:</p>
+            <pre><code>git status</code></pre>
+            
+            <h4>Istorija izmena</h4>
+            <p>Prikazuje listu svih komitova u projektu, omogućavajući praćenje istorije rada:</p>
+            <pre><code>git log --oneline</code></pre>
+        </div>
+        
+        <div class="section">
+            <h2>2. Grananje i Merge Konflikti</h2>
+            <h3>Kreiranje i Prebacivanje na Novu Granu</h3>
+            <p>Grananje omogućava paralelni rad na različitim delovima projekta bez uticaja na glavnu verziju projekta. Komande za rad sa granama su:</p>
+            <pre><code>git branch [ime_grane]      # Kreiranje nove grane
+                git checkout [ime_grane]    # Prebacivanje na granu
+                git checkout -b [ime_grane] # Kreiranje i prebacivanje na novu granu</code></pre>
+                
+                <img src="branching.PNG" alt="">
+                
+                <h3>Spajanje Grana</h3>
+                <p>Kada završite rad na novoj grani, možete je spojiti sa glavnom granom koristeći sledeće komande:</p>
+                <pre><code>git checkout main
+                    git merge [ime_grane]</code></pre>
+                    
+                    <img src="branching_merge.PNG" alt="">
+                    
+                    <h3>Rešavanje Merge Konflikata</h3>
+                    <p>Konflikti nastaju kada dve ili više grana imaju izmene na istim delovima koda. Git označava konflikte i od vas traži da ih ručno rešite:</p>
+                    <ul>
+                        <li>Otvorite fajl sa konfliktima i ručno izmenite linije između <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+                        <li>Nakon rešavanja:
+                            <pre><code>git add [ime_fajla]
+                                git commit -m "Rešen konflikt"</code></pre>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h2>3. Šta je GitHub?</h2>
+                        <p>GitHub je platforma za hostovanje Git repozitorijuma i omogućava kolaboraciju na daljinu sa timovima programera. Razlika između Git-a i GitHub-a je u tome što je Git alat za lokalno upravljanje verzijama koda, dok je GitHub platforma za deljenje projekata i rad na zajedničkim repozitorijumima.</p>
+                        <img src="github_devsify.PNG" alt="">
+                    </div>
+                    
+                    <div class="note">
+                        <strong>Dodatno:</strong> U sledećim poglavljima su dodatne, "naprednije" stvari.
+                    </div>
+                    
+                    <div class="section">
+                        <h2>4. `git rebase` i `git stash`</h2>
+                        <h3>`git stash` – Privremeno Čuvanje Izmena</h3>
+                        <p>Kada želite da privremeno sačuvate izmene bez kreiranja komita, koristite komandu <code>git stash</code>. Ovo je korisno kada prelazite na rad na drugoj grani:</p>
+                        <pre><code>git stash          # Sačuvaj izmene i vrati radni direktorijum na čist
+                            git stash pop      # Vrati izmene iz stash-a
+                            git stash list     # Prikaži sve stash-ove</code></pre>
+                            
+                            <h3>`git rebase -i` – Interaktivno Preuređivanje Komitova</h3>
+                            <p>Interaktivni rebase omogućava uređivanje istorije komitova kako biste spojili komitove, preimenovali ih ili uklonili nepotrebne promene:</p>
+                            <pre><code>git rebase -i HEAD~n   # Rebase poslednjih n komitova</code></pre>
+                            <p>Mogućnosti:</p>
+                            <ul>
+                                <li><code>pick</code> – zadrži komit</li>
+                                <li><code>squash</code> – spoji komit sa prethodnim</li>
+                                <li><code>edit</code> – izmeni komit</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h2>5. Git Hooks – Automatizacija</h2>
+                            <h3>Šta su Git Hooks?</h3>
+                            <p>Git Hooks su skripte koje se automatski pokreću tokom određenih Git operacija, poput komitovanja ili spajanja grana. Ovi skripti mogu proveravati format koda, pokretati testove i slično.</p>
+                            
+                            <h3>Primer `pre-commit` Hook-a:</h3>
+                            <p>Skripta koja proverava format koda pre komitovanja:</p>
+                            <ol>
+                                <li>Kreirajte fajl <code>.git/hooks/pre-commit</code> i unesite sledeći sadržaj:
+                                    <pre><code>#!/bin/bash
+                                        ./lint.sh</code></pre>
+                                    </li>
+                                    <li>Postavite dozvole za izvršavanje:
+                                        <pre><code>chmod +x .git/hooks/pre-commit</code></pre>
+                                    </li>
+                                </ol>
+                            </div>
+                            
+                            <div class="section">
+                                <h2>6. `git bisect` – Pronalaženje Baga</h2>
+                                <h3>Kako `git bisect` Funkcioniše</h3>
+                                <p>`git bisect` koristi binarnu pretragu kako bi pronašao prvi komit gde se pojavila greška. Ovo je korisno kada imate veliki broj komitova i želite brzo da pronađete uzrok problema.</p>
+                                <pre><code>git bisect start
+                                    git bisect bad HEAD         # Trenutna verzija je loša
+                                    git bisect good [commit_id] # Poslednja dobra verzija</code></pre>
+                                    <p>Git će vas voditi kroz korake kako biste na osnovu svojih odgovora pronašli problematičan komit.</p>
+                                    <h4>Povratak na normalno stanje:</h4>
+                                    <pre><code>git bisect reset</code></pre>
+                                </div>
+                                
+                                <div class="section">
+                                    <h2>7. GitHub kao Platforma za Saradnju</h2>
+                                    <h3>Kreiranje Pull Request-a (PR)</h3>
+                                    <p>Pull Request (PR) je zahtev za spajanje vaših izmena sa glavnom granom projekta. Na GitHub-u kreirate PR, pišete opis vaših izmena i tražite da kolege pregledaju vaš rad.</p>
+                                    
+                                    <h3>Pregled i Komentarisanje PR-a:</h3>
+                                    <p>Kolege mogu komentarisati linije koda u okviru vašeg PR-a kako bi ukazali na moguće ispravke ili predložili poboljšanja.</p>
+                                </div>
+                                
+                                <div class="section">
+                                    <h2>8. Podešavanje Git Konfiguracije (`.gitconfig`)</h2>
+                                    <h3>Globalna Podešavanja:</h3>
+                                    <p>Git omogućava konfiguraciju globalnih postavki kao što su ime autora i email adresa:</p>
+                                    <pre><code>git config --global user.name "Vaše Ime"
+                                        git config --global user.email "vaš.email@example.com"</code></pre>
+                                        
+                                        <h3>Dodavanje Alijasa:</h3>
+                                        <p>Alijasi omogućavaju skraćene komande za češće korišćene operacije:</p>
+                                        <pre><code>git config --global alias.co checkout
+                                            git config --global alias.br branch
+                                            git config --global alias.cm commit</code></pre>
+                                        </div>
+                                        
+                                        <div class="section">
+                                            <h2>9. Kolaboracija sa `fork` i `upstream`</h2>
+                                            <h3>Razlika između `clone`, `fork` i `upstream`:</h3>
+                                            <p>`clone` preuzima kopiju repozitorijuma na vaš računar, `fork` pravi kopiju repozitorijuma na vašem GitHub nalogu, dok `upstream` označava originalni repozitorijum sa kojeg je `fork` napravljen.</p>
+                                            
+                                            <h3>Dodavanje `upstream`-a:</h3>
+                                            <p>Kada radite sa fork-ovanim repozitorijumom, potrebno je da dodate `upstream` kako biste mogli da ažurirate svoj repozitorijum sa originalnim izmenama:</p>
+                                            <pre><code>git remote add upstream [URL_ORIGINALNOG_REPOZITORIJUMA]</code></pre>
+                                            
+                                            <h3>Ažuriranje `fork`-a:</h3>
+                                            <p>Preuzimanje izmena iz `upstream` repozitorijuma i njihovo spajanje sa vašim lokalnim repozitorijumom:</p>
+                                            <pre><code>git fetch upstream
+                                                git merge upstream/main</code></pre>
+                                            </div>
+                                            
+                                            <div class="section">
+                                                <h2>9. Git CI/CD Pipeline-ovi</h2>
+                                                <p>Git pipeline-ovi se koriste za automatizaciju procesa kao što su testiranje koda, buildovanje aplikacija i njihovo automatsko objavljivanje. CI/CD (Continuous Integration/Continuous Delivery) proces obično uključuje sledeće korake:</p>
+                                                
+                                                <h3>1. Definisanje `YAML` fajla za CI/CD</h3>
+                                                <p>Većina CI/CD alata koristi YAML fajlove za definisanje pipeline-a. Na primer, sledeći kod predstavlja osnovni primer `.gitlab-ci.yml` fajla za GitLab CI:</p>
+                                                <pre><code>stages:
+                                                    - build
+                                                    - test
+                                                    - deploy
+                                                    
+                                                    build-job:
+                                                    stage: build
+                                                    script:
+                                                    - echo "Pokreće se build proces"
+                                                    - ./build_script.sh
+                                                    
+                                                    test-job:
+                                                    stage: test
+                                                    script:
+                                                    - echo "Pokreće se testiranje"
+                                                    - ./run_tests.sh
+                                                    
+                                                    deploy-job:
+                                                    stage: deploy
+                                                    script:
+                                                    - echo "Pokreće se deploy"
+                                                    - ./deploy.sh</code></pre>
+                                                    
+                                                    <h3>2. Primer GitHub Actions fajla (`.github/workflows/ci.yml`)</h3>
+                                                    <p>GitHub Actions koristi sličan pristup za definisanje automatizovanih koraka:</p>
+                                                    <pre><code>name: CI Pipeline
+                                                        
+                                                        on:
+                                                        push:
+                                                        branches:
+                                                        - main
+                                                        
+                                                        jobs:
+                                                        build:
+                                                        runs-on: ubuntu-latest
+                                                        steps:
+                                                        - name: Checkout koda
+                                                        uses: actions/checkout@v2
+                                                        
+                                                        - name: Instalacija zavisnosti
+                                                        run: npm install
+                                                        
+                                                        - name: Build projekta
+                                                        run: npm run build
+                                                        
+                                                        test:
+                                                        runs-on: ubuntu-latest
+                                                        steps:
+                                                        - name: Checkout koda
+                                                        uses: actions/checkout@v2
+                                                        
+                                                        - name: Pokretanje testova
+                                                        run: npm test</code></pre>
+                                                        
+                                                        <h3>3. Pokretanje lokalnih testova pre commit-a</h3>
+                                                        <p>Pre nego što se pipeline izvrši na udaljenom repozitorijumu, možete pokrenuti lokalne skripte za testiranje:</p>
+                                                        <pre><code># Pokretanje lokalnog testiranja
+                                                            ./run_tests.sh</code></pre>
+                                                            
+                                                            <h3>4. `pre-push` Hook za automatsko testiranje</h3>
+                                                            <p>Možete koristiti Git hook kako biste osigurali da testovi prođu pre slanja izmena:</p>
+                                                            <pre><code>#!/bin/bash
+                                                                echo "Pokrećem testove pre git push-a..."
+                                                                ./run_tests.sh
+                                                                
+                                                                if [ $? -ne 0 ]; then
+                                                                echo "Testovi nisu prošli! Poništavam push."
+                                                                exit 1
+                                                                fi
+                                                            </code></pre>
+                                                            <p>Skript se može sačuvati u <code>.git/hooks/pre-push</code> kako bi se automatski izvršavao.</p>
+                                                            
+                                                            <h3>5. Automatizovano objavljivanje</h3>
+                                                            <p>U CI/CD pipeline-u, nakon što su build i testovi uspešni, možete dodati korak za automatsko objavljivanje:</p>
+                                                            <pre><code>deploy:
+                                                                stage: deploy
+                                                                script:
+                                                                - echo "Deployovanje aplikacije..."
+                                                                - ssh user@server 'bash -s' &lt; ./deploy_script.sh</code></pre>
+                                                                
+                                                                <h3>6. Rešavanje problema</h3>
+                                                                <p>Ako CI/CD pipeline ne uspe, koristi se `git log`, `git diff`, i detaljni output log kako biste pronašli uzrok problema. Svaki neuspešan korak obično ima povratni kod i opis greške.</p>
+                                                                
+                                                                <p>CI/CD pipeline-ovi omogućavaju automatizaciju procesa razvoja i osiguravaju pouzdanost aplikacije. Početna postavka može zahtevati dodatno vreme, ali dugoročno značajno povećava produktivnost i smanjuje mogućnost grešaka.</p>
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </body>
+                                                    </html>
+                                                    
+                                                    
